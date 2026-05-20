@@ -102,65 +102,113 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 1.02 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.02 }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center lg:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
+            className="fixed inset-0 bg-primary-dark text-white z-[100] lg:hidden flex flex-col h-full w-full overflow-y-auto"
           >
-            {/* Close Button Top-Right */}
-            <button
-              onClick={() => setIsOpen(false)}
-              className="absolute top-6 right-6 p-2 text-accent hover:text-accent-hover transition-colors focus:outline-none cursor-pointer"
-              aria-label="Close navigation"
-            >
-              <X className="w-8 h-8" />
-            </button>
-
-            {/* Stacked Links Center-Aligned */}
-            <nav className="flex flex-col items-center space-y-6">
-              {navLinks.map((link, idx) => {
-                const isActive = pathname === link.href;
-                return (
-                  <motion.div
-                    key={link.name}
-                    initial={{ opacity: 0, x: -30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.05 + 0.1, duration: 0.3 }}
-                  >
-                    <Link
-                      href={link.href}
-                      onClick={() => setIsOpen(false)}
-                      className={`font-serif text-3xl font-bold tracking-tight hover:text-primary transition-colors py-2 block relative ${
-                        isActive ? "text-primary" : "text-secondary"
-                      }`}
-                    >
-                      {link.name}
-                      {isActive && (
-                        <span className="absolute bottom-0 left-1/4 right-1/4 h-1 bg-accent rounded-full" />
-                      )}
-                    </Link>
-                  </motion.div>
-                );
-              })}
-              
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: navLinks.length * 0.05 + 0.1, duration: 0.3 }}
-                className="pt-8 flex flex-col items-center space-y-4 w-full"
+            {/* Mobile Header Bar */}
+            <div className="flex items-center justify-between w-full h-[72px] px-6 border-b border-white/5 shrink-0 bg-primary-dark">
+              <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center py-1">
+                <Image
+                  src="/logo 1.png"
+                  alt="Furnicart Modular"
+                  width={124}
+                  height={30}
+                  priority
+                  style={{ height: "auto" }}
+                  className="h-[30px] w-auto object-contain brightness-0 invert"
+                />
+              </Link>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="p-2 text-white/80 hover:text-white transition-colors focus:outline-none cursor-pointer rounded-full border border-white/10 bg-white/5 hover:bg-white/10"
+                aria-label="Close navigation"
               >
-                <Button href="/contact" variant="primary" size="lg" onClick={() => setIsOpen(false)}>
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* Scrollable Navigation Area */}
+            <div className="flex-1 flex flex-col justify-between p-8 md:p-12 w-full max-w-lg mx-auto">
+              <nav className="flex flex-col space-y-5 my-auto py-6">
+                <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-accent mb-2 block opacity-85">
+                  Corporate Workspace Menu
+                </span>
+                {navLinks.map((link, idx) => {
+                  const isActive = pathname === link.href;
+                  return (
+                    <motion.div
+                      key={link.name}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: idx * 0.04 + 0.1, duration: 0.25 }}
+                    >
+                      <Link
+                        href={link.href}
+                        onClick={() => setIsOpen(false)}
+                        className="group flex items-center justify-between py-3.5 border-b border-white/5"
+                      >
+                        <div className="flex items-baseline">
+                          <span className="text-accent font-sans text-xs font-bold tracking-widest mr-4 opacity-70">
+                            0{idx + 1}
+                          </span>
+                          <span
+                            className={`font-serif text-2xl font-bold tracking-wide transition-colors ${
+                              isActive ? "text-white" : "text-white/60 group-hover:text-white"
+                            }`}
+                          >
+                            {link.name}
+                          </span>
+                        </div>
+                        <span
+                          className={`w-2 h-2 rounded-full bg-accent transition-transform duration-300 ${
+                            isActive ? "scale-100" : "scale-0 group-hover:scale-100"
+                          }`}
+                        />
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+              </nav>
+
+              {/* Bottom Actions */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: navLinks.length * 0.04 + 0.15, duration: 0.3 }}
+                className="pt-8 border-t border-white/5 space-y-6"
+              >
+                <Button
+                  href="/contact"
+                  variant="primary"
+                  size="lg"
+                  onClick={() => setIsOpen(false)}
+                  className="w-full justify-center text-center bg-accent hover:bg-accent-hover text-white shadow-[0_4px_20px_rgba(227,27,35,0.15)] text-[13px] border-none py-4"
+                >
                   Get Free Quote
                 </Button>
-                <a
-                  href="tel:+919867032565"
-                  className="text-primary hover:text-primary-dark font-sans font-semibold uppercase tracking-widest text-sm"
-                >
-                  Call: +91 98670 32565
-                </a>
+                
+                <div className="flex flex-col space-y-2.5 text-center font-sans">
+                  <a
+                    href="tel:+919867032565"
+                    className="text-white/70 hover:text-white transition-colors text-sm font-semibold"
+                  >
+                    Call: +91 98670 32565
+                  </a>
+                  <a
+                    href="mailto:contact@furnicart.in"
+                    className="text-white/50 hover:text-white transition-colors text-xs"
+                  >
+                    Email: contact@furnicart.in
+                  </a>
+                  <p className="text-white/30 text-[10px] pt-1 uppercase tracking-wider">
+                    Wada & Vapi Automated Production Plants
+                  </p>
+                </div>
               </motion.div>
-            </nav>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
