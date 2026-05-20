@@ -187,7 +187,7 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row items-center justify-between text-xs text-white/40 space-y-4 md:space-y-0 font-sans">
-          <p>Copyright © 2025 Furnicart Modular Pvt. Ltd. All rights reserved.</p>
+          <p>Copyright © 2026 Furnicart Modular Pvt. Ltd. All rights reserved.</p>
           <div className="flex space-x-6">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
