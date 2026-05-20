@@ -46,7 +46,7 @@ export default function Navbar() {
           {/* Logo Left */}
           <Link href="/" className="flex items-center select-none py-1">
             <Image
-              src="/logo 1.png"
+              src="/logo1.png"
               alt="Furnicart Modular"
               width={124}
               height={30}
@@ -112,7 +112,7 @@ export default function Navbar() {
             <div className="flex items-center justify-between w-full h-[72px] px-6 border-b border-white/5 shrink-0 bg-primary-dark">
               <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center py-1">
                 <Image
-                  src="/logo 1.png"
+                  src="/logo1.png"
                   alt="Furnicart Modular"
                   width={124}
                   height={30}
