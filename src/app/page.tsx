@@ -1,9 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, Star, ShieldCheck, Flame, Compass, ChevronRight, ChevronLeft, Layers, Hammer, Building } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Container from "@/components/Container";
@@ -14,24 +16,10 @@ import ProjectCard from "@/components/ProjectCard";
 import TestimonialCard from "@/components/TestimonialCard";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function Home() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 },
-    },
-  } as const;
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { type: "spring", stiffness: 100, damping: 20 },
-    },
-  } as const;
-
+  /* ─── Hero Carousel State ─── */
   const slides = [
     {
       image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1920",
@@ -121,6 +109,222 @@ export default function Home() {
   const handlePrevSlide = () => {
     setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
   };
+
+  /* ─── GSAP ScrollTrigger Refs ─── */
+  const proofStripRef = useRef<HTMLElement>(null);
+  const trustedByRef = useRef<HTMLElement>(null);
+  const servicesHeadingRef = useRef<HTMLDivElement>(null);
+  const servicesGridRef = useRef<HTMLDivElement>(null);
+  const servicesCTARef = useRef<HTMLDivElement>(null);
+  const processHeadingRef = useRef<HTMLDivElement>(null);
+  const processGridRef = useRef<HTMLDivElement>(null);
+  const portfolioHeadingRef = useRef<HTMLDivElement>(null);
+  const portfolioGridRef = useRef<HTMLDivElement>(null);
+  const whyTextRef = useRef<HTMLDivElement>(null);
+  const whyFeaturesRef = useRef<HTMLDivElement>(null);
+  const whyImageRef = useRef<HTMLDivElement>(null);
+  const testimonialsHeadingRef = useRef<HTMLDivElement>(null);
+  const testimonialsGridRef = useRef<HTMLDivElement>(null);
+  const ctaBannerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      /* ── Proof strip slide up ── */
+      if (proofStripRef.current) {
+        gsap.fromTo(
+          proofStripRef.current,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1, y: 0, duration: 0.8, ease: "power3.out",
+            scrollTrigger: { trigger: proofStripRef.current, start: "top 90%" },
+          }
+        );
+      }
+
+      /* ── Trusted By marquee fade in ── */
+      if (trustedByRef.current) {
+        gsap.fromTo(
+          trustedByRef.current,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1, y: 0, duration: 1, ease: "power3.out",
+            scrollTrigger: { trigger: trustedByRef.current, start: "top 88%" },
+          }
+        );
+      }
+
+      /* ── Services heading ── */
+      if (servicesHeadingRef.current) {
+        gsap.fromTo(
+          servicesHeadingRef.current,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1, y: 0, duration: 1, ease: "power3.out",
+            scrollTrigger: { trigger: servicesHeadingRef.current, start: "top 85%" },
+          }
+        );
+      }
+
+      /* ── Services grid stagger ── */
+      if (servicesGridRef.current) {
+        gsap.fromTo(
+          servicesGridRef.current.children,
+          { opacity: 0, y: 70, scale: 0.95 },
+          {
+            opacity: 1, y: 0, scale: 1, duration: 0.8, stagger: 0.12, ease: "power3.out",
+            scrollTrigger: { trigger: servicesGridRef.current, start: "top 80%" },
+          }
+        );
+      }
+
+      /* ── Services CTA ── */
+      if (servicesCTARef.current) {
+        gsap.fromTo(
+          servicesCTARef.current,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1, y: 0, duration: 0.8, ease: "power3.out",
+            scrollTrigger: { trigger: servicesCTARef.current, start: "top 90%" },
+          }
+        );
+      }
+
+      /* ── Process heading ── */
+      if (processHeadingRef.current) {
+        gsap.fromTo(
+          processHeadingRef.current,
+          { opacity: 0, x: -60 },
+          {
+            opacity: 1, x: 0, duration: 1, ease: "power3.out",
+            scrollTrigger: { trigger: processHeadingRef.current, start: "top 85%" },
+          }
+        );
+      }
+
+      /* ── Process cards stagger with scale ── */
+      if (processGridRef.current) {
+        gsap.fromTo(
+          processGridRef.current.children,
+          { opacity: 0, y: 80, scale: 0.9, rotateX: 10 },
+          {
+            opacity: 1, y: 0, scale: 1, rotateX: 0, duration: 0.9,
+            stagger: 0.15, ease: "back.out(1.2)",
+            scrollTrigger: { trigger: processGridRef.current, start: "top 80%" },
+          }
+        );
+      }
+
+      /* ── Portfolio heading ── */
+      if (portfolioHeadingRef.current) {
+        gsap.fromTo(
+          portfolioHeadingRef.current,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1, y: 0, duration: 1, ease: "power3.out",
+            scrollTrigger: { trigger: portfolioHeadingRef.current, start: "top 85%" },
+          }
+        );
+      }
+
+      /* ── Portfolio grid stagger ── */
+      if (portfolioGridRef.current) {
+        gsap.fromTo(
+          portfolioGridRef.current.children,
+          { opacity: 0, y: 70, scale: 0.95 },
+          {
+            opacity: 1, y: 0, scale: 1, duration: 0.8, stagger: 0.15, ease: "power3.out",
+            scrollTrigger: { trigger: portfolioGridRef.current, start: "top 80%" },
+          }
+        );
+      }
+
+      /* ── Why Choose Us: Text from left ── */
+      if (whyTextRef.current) {
+        gsap.fromTo(
+          whyTextRef.current,
+          { opacity: 0, x: -80 },
+          {
+            opacity: 1, x: 0, duration: 1.1, ease: "power3.out",
+            scrollTrigger: { trigger: whyTextRef.current, start: "top 80%" },
+          }
+        );
+      }
+
+      /* ── Why Choose Us: Feature cards stagger ── */
+      if (whyFeaturesRef.current) {
+        gsap.fromTo(
+          whyFeaturesRef.current.children,
+          { opacity: 0, x: -40, y: 20 },
+          {
+            opacity: 1, x: 0, y: 0, duration: 0.7, stagger: 0.12, ease: "power3.out",
+            scrollTrigger: { trigger: whyFeaturesRef.current, start: "top 80%" },
+          }
+        );
+      }
+
+      /* ── Why Choose Us: Image from right with parallax ── */
+      if (whyImageRef.current) {
+        gsap.fromTo(
+          whyImageRef.current,
+          { opacity: 0, x: 80, scale: 0.92 },
+          {
+            opacity: 1, x: 0, scale: 1, duration: 1.2, ease: "power3.out",
+            scrollTrigger: { trigger: whyImageRef.current, start: "top 80%" },
+          }
+        );
+        // Subtle parallax float on the image
+        gsap.to(whyImageRef.current, {
+          y: -30,
+          ease: "none",
+          scrollTrigger: {
+            trigger: whyImageRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.5,
+          },
+        });
+      }
+
+      /* ── Testimonials heading ── */
+      if (testimonialsHeadingRef.current) {
+        gsap.fromTo(
+          testimonialsHeadingRef.current,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1, y: 0, duration: 1, ease: "power3.out",
+            scrollTrigger: { trigger: testimonialsHeadingRef.current, start: "top 85%" },
+          }
+        );
+      }
+
+      /* ── Testimonials grid stagger ── */
+      if (testimonialsGridRef.current) {
+        gsap.fromTo(
+          testimonialsGridRef.current.children,
+          { opacity: 0, y: 60, rotateY: 8 },
+          {
+            opacity: 1, y: 0, rotateY: 0, duration: 0.9, stagger: 0.18,
+            ease: "power3.out",
+            scrollTrigger: { trigger: testimonialsGridRef.current, start: "top 80%" },
+          }
+        );
+      }
+
+      /* ── CTA Banner ── */
+      if (ctaBannerRef.current) {
+        gsap.fromTo(
+          ctaBannerRef.current,
+          { opacity: 0, y: 60, scale: 0.97 },
+          {
+            opacity: 1, y: 0, scale: 1, duration: 1, ease: "power3.out",
+            scrollTrigger: { trigger: ctaBannerRef.current, start: "top 85%" },
+          }
+        );
+      }
+    });
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <>
@@ -216,7 +420,7 @@ export default function Home() {
             </div>
           </Container>
 
-          {/* Left Arrow Controls (hidden on mobile, touch swipes/indicator dots instead) */}
+          {/* Left Arrow Controls */}
           <button
             onClick={handlePrevSlide}
             className="absolute left-6 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-black/40 hover:bg-black/75 border border-white/10 text-white hover:scale-105 transition-all cursor-pointer hidden md:flex items-center justify-center focus:outline-none"
@@ -251,8 +455,10 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ═══════════ GSAP ANIMATED SECTIONS ═══════════ */}
+
         {/* Proof Strip */}
-        <section className="bg-section-alt border-b border-border/80 py-6 overflow-hidden">
+        <section ref={proofStripRef} className="bg-section-alt border-b border-border/80 py-6 overflow-hidden">
           <Container className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4 w-full">
             {/* Reviews Proof */}
             <div className="flex items-center space-x-3">
@@ -280,7 +486,7 @@ export default function Home() {
         </section>
 
         {/* Trusted By Client Logos with Infinite Marquee */}
-        <section className="bg-white py-12 border-b border-border/60 relative overflow-hidden">
+        <section ref={trustedByRef} className="bg-white py-12 border-b border-border/60 relative overflow-hidden">
           {/* Mask Fades */}
           <div className="pointer-events-none absolute inset-y-0 left-0 w-20 md:w-32 bg-gradient-to-r from-white to-transparent z-10" />
           <div className="pointer-events-none absolute inset-y-0 right-0 w-20 md:w-32 bg-gradient-to-l from-white to-transparent z-10" />
@@ -330,20 +536,19 @@ export default function Home() {
         {/* Services Teaser */}
         <section className="py-24 md:py-32 bg-white">
           <Container>
-            <SectionHeading
-              title="Corporate Modular Furniture"
-              subtitle="Tailored partition systems, workstations, and high-durability executive cabin setups optimized for workspace efficiency."
-              tag="Products"
-            />
+            <div ref={servicesHeadingRef}>
+              <SectionHeading
+                title="Corporate Modular Furniture"
+                subtitle="Tailored partition systems, workstations, and high-durability executive cabin setups optimized for workspace efficiency."
+                tag="Products"
+              />
+            </div>
 
-            <motion.div
+            <div
+              ref={servicesGridRef}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10"
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
             >
-              <motion.div variants={itemVariants}>
+              <div>
                 <ServiceCard
                   title="Low Height Workstations"
                   description="Ergonomically engineered workstations featuring built-in wire-management raceways, premium acoustical privacy partitions, and steel structure frames."
@@ -351,8 +556,8 @@ export default function Home() {
                   imageUrl="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=600"
                   href="/products"
                 />
-              </motion.div>
-              <motion.div variants={itemVariants}>
+              </div>
+              <div>
                 <ServiceCard
                   title="Modular Full Height Partitions"
                   description="Premium aluminum frame layout partitions in customized frosted glass, acoustic laminate wood, or gypsum panels designed to isolate clean offices."
@@ -360,8 +565,8 @@ export default function Home() {
                   imageUrl="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=600"
                   href="/products"
                 />
-              </motion.div>
-              <motion.div variants={itemVariants}>
+              </div>
+              <div>
                 <ServiceCard
                   title="Cabin & Executive Furniture"
                   description="Bespoke luxury executive desks, walnut veneer tables, comfortable ergonomic chairs, and integrated storage side units for board directors."
@@ -369,8 +574,8 @@ export default function Home() {
                   imageUrl="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=600"
                   href="/products"
                 />
-              </motion.div>
-              <motion.div variants={itemVariants}>
+              </div>
+              <div>
                 <ServiceCard
                   title="Conference Tables"
                   description="Modern boardrooms and conference tables featuring hidden cable popups, integrated connectivity panels, and high-pressure wooden laminate cores."
@@ -378,8 +583,8 @@ export default function Home() {
                   imageUrl="https://images.unsplash.com/photo-1517502884422-41eaaced0168?auto=format&fit=crop&q=80&w=600"
                   href="/products"
                 />
-              </motion.div>
-              <motion.div variants={itemVariants}>
+              </div>
+              <div>
                 <ServiceCard
                   title="Modular Office Storage"
                   description="High-capacity filing cupboards, sliding credenzas, individual employee drawer pedestals, and lockers finished with premium edgebanding."
@@ -387,10 +592,10 @@ export default function Home() {
                   imageUrl="https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&q=80&w=600"
                   href="/products"
                 />
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
-            <div className="text-center mt-16">
+            <div ref={servicesCTARef} className="text-center mt-16">
               <Button href="/services" variant="secondary" size="lg">
                 View Material Swatches & Specs
               </Button>
@@ -404,7 +609,7 @@ export default function Home() {
           <div className="absolute inset-0 opacity-5 pointer-events-none wood-grain" />
 
           <Container>
-            <div className="max-w-3xl mb-16 text-left">
+            <div ref={processHeadingRef} className="max-w-3xl mb-16 text-left">
               <span className="font-sans text-xs font-bold uppercase tracking-widest text-[#EEF4EE] mb-3 block">
                 Workflow
               </span>
@@ -416,7 +621,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6 relative">
+            <div ref={processGridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6 relative" style={{ perspective: "1000px" }}>
               {/* Process Step 1 */}
               <div className="relative group bg-white/5 border border-white/10 rounded-[12px] p-8 hover:bg-white/10 transition-colors duration-300">
                 <span className="font-serif text-[44px] font-bold text-accent/30 group-hover:text-accent/60 transition-colors leading-none block mb-4">
@@ -475,7 +680,7 @@ export default function Home() {
         {/* Portfolio Teaser */}
         <section className="py-24 md:py-32 bg-page-bg">
           <Container>
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <div ref={portfolioHeadingRef} className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
               <SectionHeading
                 title="Delivered Workspaces"
                 subtitle="Explore our recently constructed premium commercial layouts engineered for high durability and ergonomics."
@@ -489,14 +694,11 @@ export default function Home() {
               </div>
             </div>
 
-            <motion.div
+            <div
+              ref={portfolioGridRef}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
             >
-              <motion.div variants={itemVariants}>
+              <div>
                 <ProjectCard
                   title="NCC Executive Open-Plan Workspaces"
                   category="Low Height Workstations"
@@ -504,8 +706,8 @@ export default function Home() {
                   location="Kalyan, Thane"
                   scope="Modular Desks & Wire Channels"
                 />
-              </motion.div>
-              <motion.div variants={itemVariants}>
+              </div>
+              <div>
                 <ProjectCard
                   title="Oracle Premium Boardroom Suite"
                   category="Conference Tables"
@@ -513,8 +715,8 @@ export default function Home() {
                   location="Thane West IT Hub"
                   scope="Walnut Boardroom Table"
                 />
-              </motion.div>
-              <motion.div variants={itemVariants}>
+              </div>
+              <div>
                 <ProjectCard
                   title="DBS Bank Partitioning Grid"
                   category="Full Height Partition"
@@ -522,8 +724,8 @@ export default function Home() {
                   location="BKC, Mumbai"
                   scope="Glass & Gypsum Partitions"
                 />
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </Container>
         </section>
 
@@ -532,7 +734,7 @@ export default function Home() {
           <Container className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
             {/* Left 6 Columns Text */}
             <div className="lg:col-span-6 flex flex-col space-y-8">
-              <div>
+              <div ref={whyTextRef}>
                 <span className="font-sans text-xs font-bold uppercase tracking-widest text-primary mb-3 block">
                   Material Standards
                 </span>
@@ -544,7 +746,7 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
+              <div ref={whyFeaturesRef} className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
                 <div className="flex items-start space-x-3">
                   <div className="w-10 h-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shrink-0 mt-0.5">
                     <ShieldCheck className="w-5 h-5" />
@@ -588,7 +790,7 @@ export default function Home() {
             </div>
 
             {/* Right 6 Columns Bevel Image Card */}
-            <div className="lg:col-span-6 relative w-full h-[400px] md:h-[480px] rounded-[16px] overflow-hidden border border-border shadow-warm-soft">
+            <div ref={whyImageRef} className="lg:col-span-6 relative w-full h-[400px] md:h-[480px] rounded-[16px] overflow-hidden border border-border shadow-warm-soft">
               <Image
                 src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=1200"
                 alt="Precision modular office furniture manufacturing details"
@@ -603,13 +805,15 @@ export default function Home() {
         {/* Testimonials */}
         <section className="py-24 md:py-32 bg-white">
           <Container>
-            <SectionHeading
-              title="Verified Corporate Feedback"
-              subtitle="Nothing speaks louder than commercial projects executed cleanly. Read what local project managers say."
-              tag="Testimonials"
-            />
+            <div ref={testimonialsHeadingRef}>
+              <SectionHeading
+                title="Verified Corporate Feedback"
+                subtitle="Nothing speaks louder than commercial projects executed cleanly. Read what local project managers say."
+                tag="Testimonials"
+              />
+            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div ref={testimonialsGridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" style={{ perspective: "800px" }}>
               <TestimonialCard
                 quote="Furnicart Modular successfully delivered 120 low-height workstations and full-height partitions for our Thane IT park. Butter-smooth modular execution, robust aluminum columns, and zero delays."
                 author="Romell Group Procurement"
@@ -637,25 +841,27 @@ export default function Home() {
           <div className="absolute inset-0 z-0 opacity-5 pointer-events-none wood-grain" />
 
           <Container className="relative z-10 max-w-4xl flex flex-col items-center text-center space-y-8">
-            <span className="font-sans text-xs font-bold uppercase tracking-widest text-accent">
-              Inquiry Desk
-            </span>
-            <h2 className="text-3xl md:text-5xl font-serif font-bold tracking-tight text-white leading-tight">
-              Ready to Optimize Your Corporate Floor Plan?
-            </h2>
-            <p className="text-sm md:text-base text-white/70 max-w-2xl leading-relaxed font-sans mx-auto">
-              Get an accurate commercial budget estimation, custom CAD layouts, and material swatches. Reach out to Swarup Bole directly or book an on-site workspace consultation in Kalyan, Thane, or BKC.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center w-full pt-4">
-              <Button href="/contact" variant="primary" size="lg" className="bg-accent text-white hover:bg-accent-hover rounded-[8px]">
-                Request Project Call
-              </Button>
-              <a
-                href="tel:+919867032565"
-                className="inline-flex items-center justify-center font-sans text-xs font-bold uppercase tracking-widest px-8 py-4 rounded-[8px] bg-transparent border border-white/20 text-white hover:bg-white/10 transition-all duration-300"
-              >
-                Call: +91 98670 32565
-              </a>
+            <div ref={ctaBannerRef} className="flex flex-col items-center text-center space-y-8">
+              <span className="font-sans text-xs font-bold uppercase tracking-widest text-accent">
+                Inquiry Desk
+              </span>
+              <h2 className="text-3xl md:text-5xl font-serif font-bold tracking-tight text-white leading-tight">
+                Ready to Optimize Your Corporate Floor Plan?
+              </h2>
+              <p className="text-sm md:text-base text-white/70 max-w-2xl leading-relaxed font-sans mx-auto">
+                Get an accurate commercial budget estimation, custom CAD layouts, and material swatches. Reach out to Swarup Bole directly or book an on-site workspace consultation in Kalyan, Thane, or BKC.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center w-full pt-4">
+                <Button href="/contact" variant="primary" size="lg" className="bg-accent text-white hover:bg-accent-hover rounded-[8px]">
+                  Request Project Call
+                </Button>
+                <a
+                  href="tel:+919867032565"
+                  className="inline-flex items-center justify-center font-sans text-xs font-bold uppercase tracking-widest px-8 py-4 rounded-[8px] bg-transparent border border-white/20 text-white hover:bg-white/10 transition-all duration-300"
+                >
+                  Call: +91 98670 32565
+                </a>
+              </div>
             </div>
           </Container>
         </section>
