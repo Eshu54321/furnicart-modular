@@ -102,11 +102,11 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2, ease: "easeInOut" }}
-            className="fixed inset-0 bg-primary-dark text-white z-[100] lg:hidden flex flex-col h-full w-full overflow-y-auto"
+            initial={{ x: "-100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "-100%" }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="fixed inset-0 bg-primary-dark/90 backdrop-blur-md text-white z-[100] lg:hidden flex flex-col h-full w-full overflow-y-auto"
           >
             {/* Mobile Header Bar */}
             <div className="flex items-center justify-between w-full h-[72px] px-6 border-b border-white/5 shrink-0 bg-primary-dark">

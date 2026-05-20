@@ -30,8 +30,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
   },
-  icons: {
-    icon: "/logo 2.png",
+    icons: {
+    icon: "/logo 1.png",
   }
 };
 
