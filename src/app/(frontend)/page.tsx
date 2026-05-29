@@ -329,7 +329,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="flex-1 pt-[72px] bg-page-bg">
+      <main className="flex-1 pt-[72px] bg-page-bg overflow-x-hidden">
         {/* Full-Screen Hero Carousel (inspired by natrajfurniture.com) */}
         <section className="relative lg:h-[calc(100vh-72px)] min-h-[calc(100vh-72px)] lg:min-h-0 flex items-center bg-black overflow-hidden border-b border-border">
           {/* Background Images Cross-Fade */}
