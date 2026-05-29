@@ -47,7 +47,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-sm text-white/60 leading-relaxed font-sans">
-              "Manufacturing premium modular workspace installations since 2014."
+              &quot;Manufacturing premium modular workspace installations since 2014.&quot;
             </p>
             <div className="flex space-x-3 pt-2">
               {/* Instagram */}
