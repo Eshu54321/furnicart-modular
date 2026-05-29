@@ -43,7 +43,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${inter.variable} ${montserrat.variable} h-full antialiased`}
+      className={`${playfair.variable} ${inter.variable} ${montserrat.variable} h-full antialiased overflow-x-hidden`}
       suppressHydrationWarning
     >
       <body
