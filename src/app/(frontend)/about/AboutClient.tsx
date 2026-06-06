@@ -226,6 +226,7 @@ export default function AboutClient({ team }: AboutClientProps) {
                     src="/images/Workstations and cubicles with 4ft partitions/DSC08409.JPG"
                     alt="Furnicart High Capacity Manufacturing Plant"
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover animate-pulse-slow"
                   />
                 </div>
@@ -295,6 +296,7 @@ export default function AboutClient({ team }: AboutClientProps) {
                     src="/images/Workstations and cubicles with 4ft partitions/IMG-20190516-WA0025.jpg"
                     alt="Automatic Edgebander Calibration"
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover"
                   />
                 </div>
@@ -303,6 +305,7 @@ export default function AboutClient({ team }: AboutClientProps) {
                     src="/images/Workstations and cubicles with 4ft partitions/DSC06657.JPG"
                     alt="Workstation Partition Assembly"
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover"
                   />
                 </div>

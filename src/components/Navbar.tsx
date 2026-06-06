@@ -39,7 +39,7 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-45 transition-all duration-300 h-[72px] flex items-center bg-white border-b border-border ${
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 h-[72px] flex items-center bg-white border-b border-border ${
           isScrolled ? "shadow-[0_2px_16px_rgba(0,0,0,0.08)]" : "shadow-none"
         }`}
       >

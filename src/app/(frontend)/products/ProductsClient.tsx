@@ -8,7 +8,8 @@ import Button from "@/components/Button";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
 import { 
   Check, Layers, Monitor, Columns, Briefcase, 
-  Tv, FolderArchive, ShieldCheck, Zap, FileText
+  Tv, FolderArchive, ShieldCheck, Zap, FileText,
+  Home, BookOpen, FlaskConical
 } from "lucide-react";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
@@ -37,6 +38,9 @@ export default function ProductsClient({ products }: ProductsClientProps) {
 
   const categories = [
     { id: "all", name: "All Products", icon: Layers },
+    { id: "residential", name: "Residential", icon: Home },
+    { id: "school", name: "School", icon: BookOpen },
+    { id: "lab-furniture", name: "Lab Furniture", icon: FlaskConical },
     { id: "workstations", name: "Workstations", icon: Monitor },
     { id: "partitions", name: "Partitions", icon: Columns },
     { id: "cabin", name: "Cabin Furniture", icon: Briefcase },
@@ -53,8 +57,8 @@ export default function ProductsClient({ products }: ProductsClientProps) {
   React.useEffect(() => {
     // Small delay to ensure DOM is updated before triggering animations
     const timer = setTimeout(() => {
-      if (containerRef.current) {
-        const productElements = containerRef.current.children;
+      if (containerRef.current && containerRef.current.children.length > 0) {
+        const productElements = Array.from(containerRef.current.children);
         const ctx = gsap.context(() => {
           gsap.fromTo(
             productElements,
@@ -99,7 +103,10 @@ export default function ProductsClient({ products }: ProductsClientProps) {
 
         <section className="py-8 bg-white border-b border-border sticky top-[72px] z-30 shadow-[0_4px_20px_rgba(0,0,0,0.02)]">
           <Container>
-            <div className="flex overflow-x-auto md:flex-wrap items-center justify-start md:justify-center gap-2 md:gap-3 pb-4 md:pb-0 hide-scrollbar w-full snap-x snap-mandatory pt-2 px-1 md:px-0">
+            <div 
+              className="flex overflow-x-auto items-center justify-start gap-2 md:gap-3 pb-4 md:pb-4 hide-scrollbar [&::-webkit-scrollbar]:hidden w-full snap-x snap-mandatory pt-2 px-1 md:px-0"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
               {categories.map((cat) => {
                 const IconComponent = cat.icon;
                 const isActive = activeCategory === cat.id;
@@ -141,6 +148,7 @@ export default function ProductsClient({ products }: ProductsClientProps) {
                           src={product.imageUrl}
                           alt={product.title}
                           fill
+                          sizes="(max-width: 1024px) 100vw, 50vw"
                           className="object-cover transition-transform duration-500 hover:scale-[1.02]"
                         />
                       )}

@@ -817,7 +817,7 @@ export default function Home() {
             
             <div className="relative w-full max-w-4xl mx-auto rounded-[20px] md:rounded-[32px] overflow-hidden border border-white/10 shadow-2xl shadow-black/50 bg-black group flex justify-center items-center">
               <video 
-                src="/video/1.mp4" 
+                src="/images/Manufacturing unit/Furnicart Manufacturing Unit.mp4" 
                 controls 
                 autoPlay 
                 muted 
@@ -825,6 +825,41 @@ export default function Home() {
                 playsInline
                 className="w-full max-h-[75vh] object-contain transition-transform duration-700 group-hover:scale-102"
               />
+            </div>
+          </Container>
+        </section>
+
+        {/* Site Videos Section */}
+        <section className="bg-page-bg py-24 relative overflow-hidden">
+          <Container>
+            <div className="flex flex-col items-center mb-16 text-center">
+              <span className="font-sans text-xs font-bold uppercase tracking-widest text-primary mb-4 block">Project Walkthroughs</span>
+              <h2 className="text-3xl md:text-5xl font-serif font-bold text-secondary mb-6">On-Site Execution</h2>
+              <p className="text-secondary-light max-w-2xl font-sans text-sm md:text-base leading-relaxed">
+                Experience our work in real environments. Here are a few recent walkthroughs showcasing our partitions, desking, and full corporate setups.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
+              {[
+                { src: "/images/site videos/Fuji Electric, Pune.mp4", title: "Fuji Electric, Pune" },
+                { src: "/images/site videos/MIO site .mp4", title: "MIO Site Execution" },
+                { src: "/images/site videos/sliding door with partition.mp4", title: "Sliding Door & Partition" },
+                { src: "/images/site videos/sliding folding partition.mp4", title: "Sliding Folding Partition" }
+              ].map((video, idx) => (
+                <div key={idx} className="flex flex-col space-y-4">
+                  <div className="relative w-full rounded-[16px] overflow-hidden border border-border shadow-warm-soft bg-black group flex justify-center items-center aspect-video">
+                    <video 
+                      src={video.src} 
+                      controls 
+                      muted 
+                      playsInline
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-102"
+                    />
+                  </div>
+                  <h3 className="font-sans font-bold text-secondary text-lg text-center">{video.title}</h3>
+                </div>
+              ))}
             </div>
           </Container>
         </section>

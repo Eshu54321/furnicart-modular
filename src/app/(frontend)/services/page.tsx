@@ -237,6 +237,7 @@ export default function Services() {
                           src={service.img}
                           alt={service.title}
                           fill
+                          sizes="(max-width: 1024px) 100vw, 50vw"
                           className="object-cover transform transition-transform duration-700 group-hover:scale-[1.03]"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-secondary/35 via-transparent to-transparent pointer-events-none" />
