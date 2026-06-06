@@ -62,7 +62,7 @@ async function uploadImages() {
         }
       }
     } catch (err) {
-      console.error(`Error processing folder ${folder.dir}:`, err.message)
+      console.error(`Error processing folder ${folder.dir}:`, (err as Error).message)
     }
   }
   
