@@ -343,7 +343,7 @@ export default function Contact() {
         {/* 400px Tall Responsive Google Maps Iframe */}
         <section className="h-[400px] w-full border-t border-border relative overflow-hidden">
           <iframe
-            src="https://maps.google.com/maps?q=Atgaon,%20Taluka%20-%20Shahapur%20,%20District%20-%20Thane&t=&z=13&ie=UTF8&iwloc=&output=embed"
+            src="https://maps.google.com/maps?q=Furnicart%20Modular%20Private%20Limited,%20Atgaon&t=&z=15&ie=UTF8&iwloc=&output=embed"
             width="100%"
             height="100%"
             style={{ border: 0 }}
