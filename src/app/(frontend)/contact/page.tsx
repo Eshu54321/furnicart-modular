@@ -48,8 +48,8 @@ export default function Contact() {
     },
     {
       title: "Registered Studio",
-      value: "404, Murlidhar Apt, Near Gajanan Hospital, Chikenghar, Rambaug no 4, Kalyan(W)",
-      subText: "Thane, Maharashtra - 421301",
+      value: "Atgaon, Taluka - Shahapur",
+      subText: "District - Thane, Maharashtra",
       href: "#",
       icon: MapPin,
     },
@@ -343,7 +343,7 @@ export default function Contact() {
         {/* 400px Tall Responsive Google Maps Iframe */}
         <section className="h-[400px] w-full border-t border-border relative overflow-hidden">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3766.9069359300624!2d73.1384074!3d19.2428385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7968565b931cb%3A0xc39f9b51fa16db61!2sRambaug%20No%204%2C%20Kalyan%20West%2C%20Kalyan%2C%20Maharashtra%20421301!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+            src="https://maps.google.com/maps?q=Atgaon,%20Taluka%20-%20Shahapur%20,%20District%20-%20Thane&t=&z=13&ie=UTF8&iwloc=&output=embed"
             width="100%"
             height="100%"
             style={{ border: 0 }}
