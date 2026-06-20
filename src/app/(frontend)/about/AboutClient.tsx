@@ -209,7 +209,7 @@ export default function AboutClient({ team }: AboutClientProps) {
                   Incorporated in <strong>January 2014</strong>, <strong>Furnicart Modular Private Limited</strong> brings over <strong>20 years of manufacturing depth</strong> to the corporate and commercial landscape of India.
                 </p>
                 <p className="text-secondary-light text-sm md:text-base leading-relaxed mb-8 font-sans">
-                  From our high-capacity modular plants in <strong>Wada, Thane (Maharashtra)</strong> and <strong>Vapi (Gujarat)</strong>, we build high-precision systems: Low-Height Workstations with acoustic screens, Modular Full-Height Partitions, Executive Office Cabins, Conference Tables, and space-saving Commercial Storage. We are the trusted manufacturing partner for top-tier Indian businesses and multinational corporations.
+                  From our High capacity manufacturing unit at Atgaon, Taluka - Shahapur , District - Thane, we build high-precision systems: Low-Height Workstations with acoustic screens, Modular Full-Height Partitions, Executive Office Cabins, Conference Tables, and space-saving Commercial Storage. We are the trusted manufacturing partner for top-tier Indian businesses and multinational corporations.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Button href="/portfolio" variant="primary">
