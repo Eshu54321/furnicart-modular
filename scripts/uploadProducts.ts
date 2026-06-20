@@ -8,9 +8,7 @@ async function uploadProducts() {
   const publicImagesDir = join(process.cwd(), 'public', 'images')
   
   const foldersToUpload = [
-    { dir: 'Residential', category: 'residential' },
-    { dir: 'School', category: 'school' },
-    { dir: 'Lab furniture', category: 'lab-furniture' }
+    { dir: 'Modular kitchen', category: 'kitchens' }
   ]
 
   for (const folder of foldersToUpload) {

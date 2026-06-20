@@ -9,7 +9,7 @@ import WhatsAppWidget from "@/components/WhatsAppWidget";
 import { 
   Check, Layers, Monitor, Columns, Briefcase, 
   Tv, FolderArchive, ShieldCheck, Zap, FileText,
-  Home, BookOpen, FlaskConical
+  Home, BookOpen, FlaskConical, Utensils
 } from "lucide-react";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
@@ -39,6 +39,7 @@ export default function ProductsClient({ products }: ProductsClientProps) {
   const categories = [
     { id: "all", name: "All Products", icon: Layers },
     { id: "residential", name: "Residential", icon: Home },
+    { id: "kitchens", name: "Modular Kitchen", icon: Utensils },
     { id: "school", name: "School", icon: BookOpen },
     { id: "lab-furniture", name: "Lab Furniture", icon: FlaskConical },
     { id: "workstations", name: "Workstations", icon: Monitor },
