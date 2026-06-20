@@ -34,16 +34,16 @@ export default function Contact() {
   const contactCards = [
     {
       title: "Direct B2B Hotline",
-      value: "+91 98670 32565",
-      subText: "Mon - Sun: 9:00 AM to 8:00 PM",
-      href: "tel:+919867032565",
+      value: "+91 99676 87417",
+      subText: "Mr Abhishek | Mon - Sun: 9:00 AM to 8:00 PM",
+      href: "tel:+919967687417",
       icon: Phone,
     },
     {
       title: "Corporate Email",
-      value: "swarupbole@gmail.com",
-      subText: "Direct attention from Swarup Bole",
-      href: "mailto:swarupbole@gmail.com",
+      value: "info@furnicart.com",
+      subText: "Direct attention from our team",
+      href: "mailto:info@furnicart.com",
       icon: Mail,
     },
     {
@@ -118,7 +118,7 @@ export default function Contact() {
                 {/* Instant WhatsApp Consult Button */}
                 <div className="pt-4">
                   <a
-                    href="https://wa.me/919867032565"
+                    href="https://wa.me/919967687417"
                     target="_blank"
                     className="flex items-center justify-center gap-3 w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-sans text-xs font-bold uppercase tracking-widest rounded-[8px] transition-colors shadow-warm-soft"
                   >
