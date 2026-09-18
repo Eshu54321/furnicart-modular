@@ -15,7 +15,7 @@ export default function WhatsAppWidget() {
       href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-[24px] right-[24px] z-45 bg-[#25D366] text-white h-[48px] rounded-full shadow-[0_8px_30px_rgba(37,211,102,0.35)] flex items-center px-4.5 space-x-2.5 border border-white/10 hover:bg-[#20ba59] transition-all duration-300 cursor-pointer select-none"
+      className="fixed bottom-[24px] left-[24px] z-45 bg-[#25D366] text-white h-[48px] rounded-full shadow-[0_8px_30px_rgba(37,211,102,0.35)] flex items-center px-4.5 space-x-2.5 border border-white/10 hover:bg-[#20ba59] transition-all duration-300 cursor-pointer select-none"
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       whileHover={{ scale: 1.05 }}
