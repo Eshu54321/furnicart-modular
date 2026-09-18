@@ -24,6 +24,15 @@ interface GalleryClientProps {
 export default function GalleryClient({ images }: GalleryClientProps) {
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
 
+  const getImageUrl = (image: any) => {
+    if (typeof image === 'string') return image;
+    try {
+      return urlFor(image).url();
+    } catch {
+      return '';
+    }
+  };
+
   // Extract unique categories for filtering
   const allCategories = ["All", ...Array.from(new Set(images.map((img) => img.category).filter(Boolean)))];
   const [activeCategory, setActiveCategory] = useState("All");
@@ -59,20 +68,34 @@ export default function GalleryClient({ images }: GalleryClientProps) {
         <Container>
           {/* Category Filter */}
           {allCategories.length > 1 && (
-            <div className="flex overflow-x-auto pb-4 mb-8 -mx-4 px-4 md:mx-0 md:px-0 md:flex-wrap md:justify-center gap-3 snap-x [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-              {allCategories.map((category) => (
-                <button
-                  key={category as string}
-                  onClick={() => setActiveCategory(category as string)}
-                  className={`snap-start shrink-0 whitespace-nowrap px-5 py-2.5 rounded-full font-sans text-sm font-semibold transition-all duration-300 ${
-                    activeCategory === category
-                      ? "bg-primary text-white shadow-md shadow-primary/20"
-                      : "bg-white text-secondary hover:bg-gray-100 border border-border"
-                  }`}
+            <div className="relative mb-8">
+              {/* Dark fade out mask using standard CSS on the container itself to avoid off-screen bugs */}
+              <div className="relative -mx-4 md:mx-0">
+                <div 
+                  className="flex overflow-x-auto pb-4 px-4 gap-3 snap-x hide-scrollbar"
+                  style={{
+                    // Apply a dark mask using CSS
+                    maskImage: "linear-gradient(to right, black 80%, transparent 100%)",
+                    WebkitMaskImage: "linear-gradient(to right, black 80%, transparent 100%)"
+                  }}
                 >
-                  {category as string}
-                </button>
-              ))}
+                  {allCategories.map((category) => (
+                    <button
+                      key={category as string}
+                      onClick={() => setActiveCategory(category as string)}
+                      className={`snap-start shrink-0 whitespace-nowrap px-5 py-2.5 rounded-full font-sans text-sm font-semibold transition-all duration-300 ${
+                        activeCategory === category
+                          ? "bg-primary text-white shadow-md shadow-primary/20"
+                          : "bg-white text-secondary hover:bg-gray-100 border border-border"
+                      }`}
+                    >
+                      {category as string}
+                    </button>
+                  ))}
+                </div>
+                {/* Fallback absolute gradient positioned relative to screen edge */}
+                <div className="absolute right-4 md:right-0 top-0 bottom-4 w-16 bg-gradient-to-l from-gray-900 to-transparent pointer-events-none z-[100] rounded-r-lg opacity-80" />
+              </div>
             </div>
           )}
 
@@ -89,14 +112,25 @@ export default function GalleryClient({ images }: GalleryClientProps) {
                   className="relative group cursor-pointer overflow-hidden rounded-xl bg-gray-100 break-inside-avoid"
                   onClick={() => setSelectedImage(img)}
                 >
-                  <Image
-                    src={urlFor(img.image).url()}
-                    alt={img.title || "Gallery image"}
-                    width={800}
-                    height={800}
-                    unoptimized
-                    className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
+                  {typeof img.image === 'string' && img.image.match(/\.(mp4|webm|mov)$/i) ? (
+                    <video
+                      src={getImageUrl(img.image)}
+                      className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105 aspect-square"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                    />
+                  ) : (
+                    <Image
+                      src={getImageUrl(img.image)}
+                      alt={img.title || "Gallery image"}
+                      width={800}
+                      height={800}
+                      unoptimized
+                      className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  )}
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-white p-4 text-center">
                     <ZoomIn className="w-8 h-8 mb-3 opacity-80" />
@@ -140,15 +174,25 @@ export default function GalleryClient({ images }: GalleryClientProps) {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative w-full h-[80vh]">
-                <Image
-                  src={urlFor(selectedImage.image).url()}
-                  alt={selectedImage.title || "Gallery image"}
-                  fill
-                  unoptimized
-                  className="object-contain"
-                  sizes="100vw"
-                  priority
-                />
+                {typeof selectedImage.image === 'string' && selectedImage.image.match(/\.(mp4|webm|mov)$/i) ? (
+                  <video
+                    src={getImageUrl(selectedImage.image)}
+                    className="w-full h-full object-contain"
+                    autoPlay
+                    controls
+                    playsInline
+                  />
+                ) : (
+                  <Image
+                    src={getImageUrl(selectedImage.image)}
+                    alt={selectedImage.title || "Gallery image"}
+                    fill
+                    unoptimized
+                    className="object-contain"
+                    sizes="100vw"
+                    priority
+                  />
+                )}
               </div>
               
               {(selectedImage.title || selectedImage.category) && (

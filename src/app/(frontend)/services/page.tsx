@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Container from "@/components/Container";
@@ -8,6 +8,10 @@ import Button from "@/components/Button";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
 import { Check, Compass, Sparkles, Hammer, Truck, Info, Palette } from "lucide-react";
 import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface SwatchOption {
   name: string;
@@ -22,6 +26,51 @@ interface MaterialSwatch {
 }
 
 export default function Services() {
+  const mainServicesRef = useRef<HTMLDivElement>(null);
+  const swatchesRef = useRef<HTMLDivElement>(null);
+  const processRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Main services animation
+      if (mainServicesRef.current) {
+        gsap.fromTo(
+          mainServicesRef.current.children,
+          { opacity: 0, scale: 0.95, y: 40 },
+          { 
+            opacity: 1, scale: 1, y: 0, duration: 0.8, stagger: 0.15, ease: "power3.out",
+            scrollTrigger: { trigger: mainServicesRef.current, start: "top 85%" }
+          }
+        );
+      }
+
+      // Swatches section
+      if (swatchesRef.current) {
+        gsap.fromTo(
+          swatchesRef.current.children,
+          { opacity: 0, scale: 0.95, y: 40 },
+          { 
+            opacity: 1, scale: 1, y: 0, duration: 0.8, stagger: 0.15, ease: "power3.out",
+            scrollTrigger: { trigger: swatchesRef.current, start: "top 85%" }
+          }
+        );
+      }
+
+      // Process section
+      if (processRef.current) {
+        gsap.fromTo(
+          processRef.current.children,
+          { opacity: 0, scale: 0.95, y: 40 },
+          { 
+            opacity: 1, scale: 1, y: 0, duration: 0.8, stagger: 0.15, ease: "power3.out",
+            scrollTrigger: { trigger: processRef.current, start: "top 85%" }
+          }
+        );
+      }
+    });
+    return () => ctx.revert();
+  }, []);
+
   // Swatch interaction state mapping
   const [selectedSwatches, setSelectedSwatches] = useState<{ [key: string]: number }>({
     "Powder-Coated Aluminum": 0,
@@ -220,7 +269,7 @@ export default function Services() {
         {/* 5 Alternating Services Details Segment */}
         <section className="py-24">
           <Container>
-            <div className="space-y-28">
+            <div className="space-y-28" ref={mainServicesRef}>
               {mainServices.map((service, index) => {
                 const isEven = index % 2 === 0;
                 return (
@@ -294,7 +343,7 @@ export default function Services() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10" ref={swatchesRef}>
               {materialSwatches.map((material) => {
                 const activeIndex = selectedSwatches[material.title];
                 const activeSwatch = material.swatches[activeIndex];
@@ -371,7 +420,7 @@ export default function Services() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" ref={processRef}>
               {processSteps.map((step) => {
                 const Icon = step.icon;
                 return (
