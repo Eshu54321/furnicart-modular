@@ -40,6 +40,13 @@ export default function Contact() {
       icon: Phone,
     },
     {
+      title: "Direct B2B Hotline",
+      value: "+91 98670 32565",
+      subText: "Mr Swarup Bole | Mon - Sun: 9:00 AM to 8:00 PM",
+      href: "tel:+919867032565",
+      icon: Phone,
+    },
+    {
       title: "Corporate Email",
       value: "info@furnicart.com",
       subText: "Direct attention from our team",
