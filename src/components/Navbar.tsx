@@ -29,7 +29,6 @@ export default function Navbar() {
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Products", href: "/products" },
-    { name: "Portfolio", href: "/portfolio" },
     { name: "Gallery", href: "/gallery" },
     { name: "Services", href: "/services" },
     { name: "About", href: "/about" },
@@ -199,10 +198,16 @@ export default function Navbar() {
                     Call: +91 98670 32565
                   </a>
                   <a
-                    href="mailto:contact@furnicart.in"
+                    href="mailto:info@furnicart.com"
                     className="text-white/50 hover:text-white transition-colors text-xs"
                   >
-                    Email: contact@furnicart.in
+                    info@furnicart.com
+                  </a>
+                  <a
+                    href="mailto:swarupbole@gmail.com"
+                    className="text-white/50 hover:text-white transition-colors text-xs"
+                  >
+                    swarupbole@gmail.com
                   </a>
                   <p className="text-white/30 text-[10px] pt-1 uppercase tracking-wider">
                     Wada & Vapi Automated Production Plants

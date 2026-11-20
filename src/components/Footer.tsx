@@ -7,7 +7,8 @@ import Container from "./Container";
 export default function Footer() {
   const quickLinks = [
     { name: "Home", href: "/" },
-    { name: "Portfolio", href: "/portfolio" },
+    { name: "Products", href: "/products" },
+    { name: "Gallery", href: "/gallery" },
     { name: "Services", href: "/services" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
@@ -150,32 +151,49 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-accent shrink-0 mt-0.5" />
-                <span className="text-sm text-white/60 leading-relaxed font-sans">
-                  Kalyan (W), Thane – 421 301
-                </span>
+                <div className="flex flex-col font-sans text-sm text-white/60 leading-relaxed">
+                  <span>Atgaon, Taluka - Shahapur</span>
+                  <span className="text-xs text-white/40">District - Thane, Maharashtra</span>
+                </div>
               </li>
-              <li className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-accent shrink-0" />
-                <a
-                  href="tel:+919867032565"
-                  className="text-sm text-white/60 hover:text-accent transition-colors duration-300 font-sans"
-                >
-                  +91 98670 32565
-                </a>
+              <li className="flex items-start space-x-3">
+                <Phone className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+                <div className="flex flex-col space-y-1 font-sans">
+                  <a
+                    href="tel:+919867032565"
+                    className="text-sm text-white/60 hover:text-accent transition-colors duration-300"
+                  >
+                    +91 98670 32565 <span className="text-xs text-white/40">(Mr Swarup Bole)</span>
+                  </a>
+                  <a
+                    href="tel:+919967687417"
+                    className="text-sm text-white/60 hover:text-accent transition-colors duration-300"
+                  >
+                    +91 99676 87417 <span className="text-xs text-white/40">(Mr Abhishek)</span>
+                  </a>
+                </div>
               </li>
-              <li className="flex items-center space-x-3">
-                <Mail className="w-5 h-5 text-accent shrink-0" />
-                <a
-                  href="mailto:swarupbole@gmail.com"
-                  className="text-sm text-white/60 hover:text-accent transition-colors duration-300 font-sans"
-                >
-                  swarupbole@gmail.com
-                </a>
+              <li className="flex items-start space-x-3">
+                <Mail className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+                <div className="flex flex-col space-y-1 font-sans">
+                  <a
+                    href="mailto:info@furnicart.com"
+                    className="text-sm text-white/60 hover:text-accent transition-colors duration-300"
+                  >
+                    info@furnicart.com
+                  </a>
+                  <a
+                    href="mailto:swarupbole@gmail.com"
+                    className="text-sm text-white/60 hover:text-accent transition-colors duration-300"
+                  >
+                    swarupbole@gmail.com
+                  </a>
+                </div>
               </li>
               <li className="flex items-center space-x-3">
                 <Clock className="w-5 h-5 text-accent shrink-0" />
                 <span className="text-sm text-white/60 font-sans">
-                  Mon–Sat: 10AM – 7PM
+                  Mon–Sun: 9:00 AM – 8:00 PM
                 </span>
               </li>
             </ul>

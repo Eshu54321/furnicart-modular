@@ -21,14 +21,38 @@ export default function Contact() {
 
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.phone) {
       alert("Please fill in your Name and Phone Number so our modular space planning team can reach you.");
       return;
     }
-    setSubmitted(true);
+
+    setLoading(true);
+    setErrorMessage(null);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to send message");
+      }
+
+      setSubmitted(true);
+    } catch (err: any) {
+      console.error(err);
+      setErrorMessage("Something went wrong while sending your inquiry. Please contact us via phone or WhatsApp.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const contactCards = [
@@ -49,7 +73,8 @@ export default function Contact() {
     {
       title: "Corporate Email",
       value: "info@furnicart.com",
-      subText: "Direct attention from our team",
+      secondaryValue: "swarupbole@gmail.com",
+      subText: "Direct attention from our management team",
       href: "mailto:info@furnicart.com",
       icon: Mail,
     },
@@ -115,6 +140,13 @@ export default function Contact() {
                         <div>
                           <p className="text-[10px] font-sans font-bold uppercase tracking-wider text-primary">{card.title}</p>
                           <p className="text-sm font-bold text-secondary mt-1 leading-snug">{card.value}</p>
+                          {"secondaryValue" in card && card.secondaryValue && (
+                            <p className="text-sm font-bold text-secondary mt-0.5 leading-snug">
+                              <a href={`mailto:${card.secondaryValue}`} className="hover:text-primary transition-colors">
+                                {card.secondaryValue}
+                              </a>
+                            </p>
+                          )}
                           <p className="text-[11px] text-secondary-light mt-0.5 font-sans">{card.subText}</p>
                         </div>
                       </CardWrapper>
@@ -331,12 +363,23 @@ export default function Contact() {
                         />
                       </div>
 
+                      {errorMessage && (
+                        <div className="p-3 bg-red-50 border border-red-200 text-red-600 rounded-[8px] text-xs font-sans">
+                          {errorMessage}
+                        </div>
+                      )}
+
                       <div>
                         <button
                           type="submit"
-                          className="w-full py-4 bg-primary hover:bg-[#6b4220] text-white font-sans text-xs font-bold uppercase tracking-widest rounded-[8px] transition-colors shadow-warm-soft cursor-pointer"
+                          disabled={loading}
+                          className="w-full py-4 bg-primary hover:bg-[#6b4220] disabled:opacity-60 text-white font-sans text-xs font-bold uppercase tracking-widest rounded-[8px] transition-colors shadow-warm-soft cursor-pointer flex items-center justify-center space-x-2"
                         >
-                          Request Modular Space Proposal
+                          {loading ? (
+                            <span>Sending Proposal Request...</span>
+                          ) : (
+                            <span>Request Modular Space Proposal</span>
+                          )}
                         </button>
                       </div>
                     </form>
