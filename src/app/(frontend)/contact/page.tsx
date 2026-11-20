@@ -35,15 +35,30 @@ export default function Contact() {
     setErrorMessage(null);
 
     try {
-      const res = await fetch("/api/contact", {
+      // Direct Web3Forms submission (robust, no serverless timeout issues)
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "bf0db8c9-f46d-416a-ace5-07351bed9f5c",
+          subject: `New Workspace Inquiry from ${formData.name} - Furnicart Modular`,
+          from_name: "Furnicart Website Inquiry",
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email || "Not Provided",
+          projectLocation: formData.locality || "Not Provided",
+          modularSystemNeeded: formData.projectType,
+          estimatedBudget: formData.budget,
+          message: formData.message || "No additional message",
+        }),
       });
 
       const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.error || "Failed to send message");
+      if (!data.success) {
+        throw new Error(data.message || "Failed to send message");
       }
 
       setSubmitted(true);
